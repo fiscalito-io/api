@@ -1,0 +1,73 @@
+spring:
+  application:
+    name: ${APP_NAME:facturitas-backend}
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:facturitas}
+    user: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:facturitas}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: ${HIBERNATE_DDL_AUTO:update}
+    show-sql: ${SHOW_SQL:true}
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  jackson:
+    time-zone: UTC
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: ${SERVER_CONTEXT_PATH:/api}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: ${ENABLE_SWAGGER:true}
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    enabled: ${ENABLE_SWAGGER:true}
+  packages-to-scan: ${SWAGGER_PACKAGES_TO_SCAN:com.chepido.facturitas.infrastructure.controllers}
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION:300}
+
+whatsapp:
+  api:
+    url: ${WHATSAPP_API_URL:https://graph.facebook.com/v22.0/}
+    token: ${WHATSAPP_API_TOKEN}
+  webhook:
+    verify-token: ${WHATSAPP_WEBHOOK_VERIFY_TOKEN}
+
+openai:
+  api:
+    url: ${OPENAI_API_URL:https://api.openai.com/v1}
+    key: ${OPENAI_API_KEY}
+
+logging:
+  level:
+    root: ${LOG_LEVEL_ROOT:INFO}
+    com.chepido.facturitas: ${LOG_LEVEL_APP:DEBUG}
+    org.springframework.security: ${LOG_LEVEL_SECURITY:DEBUG}
+    org.springframework.web: ${LOG_LEVEL_WEB:INFO} 
