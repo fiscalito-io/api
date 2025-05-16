@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=facturitas
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - HIBERNATE_DDL_AUTO=create-drop
+      - SHOW_SQL=true
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=facturitas
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5 
