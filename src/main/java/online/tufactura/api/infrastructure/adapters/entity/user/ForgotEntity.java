@@ -18,7 +18,7 @@ import java.time.Instant;
 @Entity(name = "forgot")
 @Getter
 @Setter
-@SuperBuilder(toBuilder = true)
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString

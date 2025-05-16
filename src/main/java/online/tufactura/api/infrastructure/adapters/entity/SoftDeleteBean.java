@@ -2,15 +2,21 @@ package online.tufactura.api.infrastructure.adapters.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.time.Instant;
 
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class SoftDeleteBean extends TimestampBean {
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+public abstract class SoftDeleteBean extends BaseBean {
     @Column(nullable = false)
     private boolean deleted = false;
 

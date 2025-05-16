@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import online.tufactura.api.domain.SoftDeletableBean;
+import online.tufactura.api.infrastructure.adapters.entity.SoftDeleteBean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,10 +18,10 @@ import java.util.List;
 @Entity
 @Setter
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder(toBuilder = true)
-public class UserEntity extends SoftDeletableBean implements UserDetails {
+@NoArgsConstructor
+@SuperBuilder
+public class UserEntity extends SoftDeleteBean implements UserDetails {
     @Column(name = "email")
     private String email;
 

@@ -15,7 +15,7 @@ import online.tufactura.api.infrastructure.adapters.entity.BaseBean;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder(toBuilder = true)
+@SuperBuilder
 @Entity(name = "flow")
 @ToString
 @Getter
