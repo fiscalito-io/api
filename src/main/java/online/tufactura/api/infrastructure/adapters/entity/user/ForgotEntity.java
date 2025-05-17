@@ -23,8 +23,6 @@ import java.time.Instant;
 @AllArgsConstructor
 @ToString
 public class ForgotEntity extends BaseBean{
-    @Column(name = "user_id")
-    private String userId;
 
     @Column(name = "code")
     private String code;
