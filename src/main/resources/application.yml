@@ -1,3 +1,5 @@
+frontend:
+  url: ${FRONTEND_URL}
 spring:
   application:
     name: ${APP_NAME:facturitas-backend}

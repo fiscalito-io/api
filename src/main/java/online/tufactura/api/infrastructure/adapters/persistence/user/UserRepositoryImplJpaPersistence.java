@@ -3,6 +3,7 @@ package online.tufactura.api.infrastructure.adapters.persistence.user;
 import lombok.RequiredArgsConstructor;
 import online.tufactura.api.application.ports.mapper.user.UserMapper;
 import online.tufactura.api.application.ports.outbound.repository.UserRepository;
+import online.tufactura.api.domain.AuthenticationProvider;
 import online.tufactura.api.domain.UserModel;
 import org.springframework.stereotype.Repository;
 
@@ -21,8 +22,9 @@ public class UserRepositoryImplJpaPersistence implements UserRepository {
     }
 
     @Override
-    public Optional<UserModel> findByProviderAndProviderId(String provider, String providerId) {
-        return Optional.empty();
+    public Optional<UserModel> findByProviderAndProviderId(AuthenticationProvider provider, String providerId) {
+        var optUserEntity = this.userRepository.findByProviderAndProviderId(provider, providerId);
+        return optUserEntity.map(userMapper::toModel);
     }
 
     @Override

@@ -8,9 +8,8 @@ import online.tufactura.api.application.ports.outbound.repository.UserRepository
 import online.tufactura.api.domain.AuthenticationProvider;
 import online.tufactura.api.domain.UserModel;
 import online.tufactura.api.domain.UserRole;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.Instant;
-import java.util.List;
 import java.util.Map;
 
 @Component
@@ -27,6 +25,9 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
     private final UserRepository userRepository;
     private final JwtService jwtService;
+
+    @Value("${frontend.url:http://localhost:5173}")
+    private String frontendUrl;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -37,9 +38,8 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         String email = (String) attributes.get("email");
         String name = (String) attributes.get("name");
-//        String picture = (String) attributes.get("picture");
-        String provider = oauthToken.getAuthorizedClientRegistrationId();
-        String providerId = (String) attributes.get("sub");
+        var provider = AuthenticationProvider.valueOf(oauthToken.getAuthorizedClientRegistrationId().toUpperCase());
+        var providerId = (String) attributes.get("sub");
 
         var optExistingUser = userRepository.findByProviderAndProviderId(provider, providerId);
         UserModel user;
@@ -58,17 +58,13 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         }
         user.setLastLoginAttempt(Instant.now());
         user = userRepository.saveUser(user);
-        String token = jwtService.generateToken(User.builder()
-                .username(user.getEmail())
-                .password("")
-                .authorities(List.of(new SimpleGrantedAuthority(user.getRole().name())))
-                .build());
+        String token = jwtService.generateToken(user);
 
         String redirectUrl = String.format("%s/auth/callback?token=%s", getFrontendUrl(), token);
         getRedirectStrategy().sendRedirect(request, response, redirectUrl);
     }
 
     private String getFrontendUrl() {
-        return "http://localhost:3000";
+        return this.frontendUrl;
     }
 } 
