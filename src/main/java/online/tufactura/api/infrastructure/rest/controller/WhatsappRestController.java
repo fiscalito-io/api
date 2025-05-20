@@ -2,8 +2,6 @@ package online.tufactura.api.infrastructure.rest.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import online.tufactura.api.application.ports.inbound.services.FlowService;
-import online.tufactura.api.domain.FlowEventModel;
 import online.tufactura.api.domain.MessageProvider;
 import online.tufactura.api.domain.MessageType;
 import online.tufactura.api.domain.models.flow.FlowCommand;
