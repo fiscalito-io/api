@@ -17,4 +17,6 @@ public interface WhatsappClient {
      * @return InputStream containing the audio data
      */
     InputStream getAudioById(String audioId);
+
+    void sendPdf(String phoneNumber, byte[] pdfInvoice, String s);
 }

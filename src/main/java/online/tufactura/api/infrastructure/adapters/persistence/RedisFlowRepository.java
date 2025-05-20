@@ -2,7 +2,7 @@ package online.tufactura.api.infrastructure.adapters.persistence;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import online.tufactura.api.domain.models.FlowContext;
+import online.tufactura.api.domain.FlowContext;
 import online.tufactura.api.domain.ports.outbound.FlowRepository;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;

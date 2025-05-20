@@ -1,4 +1,4 @@
-package online.tufactura.api.domain.models;
+package online.tufactura.api.domain;
 
 import lombok.Builder;
 import lombok.Data;

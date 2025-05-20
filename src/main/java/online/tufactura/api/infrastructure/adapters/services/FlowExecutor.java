@@ -1,10 +1,10 @@
-package online.tufactura.api.domain.services;
+package online.tufactura.api.infrastructure.adapters.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import online.tufactura.api.domain.models.FlowContext;
-import online.tufactura.api.domain.models.flow.FlowCommand;
-import online.tufactura.api.domain.models.flow.FlowState;
+import online.tufactura.api.domain.FlowContext;
+import online.tufactura.api.domain.flow.FlowCommand;
+import online.tufactura.api.application.ports.inbound.workflow.FlowState;
 import online.tufactura.api.domain.ports.outbound.FlowRepository;
 import org.springframework.stereotype.Service;
 
