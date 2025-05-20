@@ -38,7 +38,7 @@ whatsapp:
     url: http://localhost:8082
     token: test-token
   webhook:
-    verify-token: test-webhook-token
+
 
 openai:
   api:

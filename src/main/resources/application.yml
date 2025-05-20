@@ -60,7 +60,7 @@ whatsapp:
     url: ${WHATSAPP_API_URL:https://graph.facebook.com/v22.0/}
     token: ${WHATSAPP_API_TOKEN}
   webhook:
-    verify-token: ${WHATSAPP_WEBHOOK_VERIFY_TOKEN}
+
 
 openai:
   api:
