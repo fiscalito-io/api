@@ -1,4 +1,4 @@
-package online.tufactura.api.infrastructure.config;
+package online.tufactura.api.infrastructure.configuration;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

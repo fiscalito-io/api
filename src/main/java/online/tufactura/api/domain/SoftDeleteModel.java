@@ -14,6 +14,6 @@ import java.time.Instant;
 @AllArgsConstructor
 @SuperBuilder
 public abstract class SoftDeleteModel extends BaseModel {
-    private boolean deleted = false;
+    private boolean deleted;
     private Instant deletedAt;
 }

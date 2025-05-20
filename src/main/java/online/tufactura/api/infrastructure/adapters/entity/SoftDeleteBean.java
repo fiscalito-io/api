@@ -18,7 +18,7 @@ import java.time.Instant;
 @AllArgsConstructor
 public abstract class SoftDeleteBean extends BaseBean {
     @Column(nullable = false)
-    private boolean deleted = false;
+    private boolean deleted;
 
     @Column
     private Instant deletedAt;

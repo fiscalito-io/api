@@ -19,10 +19,10 @@ public class FlowExecutor {
     private final Map<String, FlowState> flowStates;
 
     public void execute(FlowCommand command) {
-        log.debug("Executing flow command: {} for phone number: {}", command.getType(), command.getPhoneNumber());
+        log.debug("Executing flow command: {} for phone number: {}", command.getType(), command.getFrom());
         
-        FlowContext context = flowRepository.findByPhoneNumber(command.getPhoneNumber())
-                .orElseGet(() -> createNewContext(command.getPhoneNumber()));
+        FlowContext context = flowRepository.findByPhoneNumber(command.getFrom())
+                .orElseGet(() -> createNewContext(command.getFrom()));
 
         FlowState currentState = flowStates.get(context.getCurrentState());
         if (currentState == null) {

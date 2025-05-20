@@ -2,11 +2,11 @@ package online.tufactura.api.domain.models.flow.states;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import online.tufactura.api.application.ports.outbound.client.WhatsappClient;
+import online.tufactura.api.application.ports.outbound.client.WhisperClient;
 import online.tufactura.api.domain.models.FlowContext;
 import online.tufactura.api.domain.models.flow.FlowCommand;
 import online.tufactura.api.domain.models.flow.FlowState;
-import online.tufactura.api.domain.ports.outbound.client.WhisperClient;
-import online.tufactura.api.domain.ports.outbound.client.WhatsappClient;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
@@ -20,7 +20,7 @@ public class ProcessingAudioState implements FlowState {
 
     @Override
     public void handle(FlowContext context, FlowCommand command) {
-        log.debug("Processing audio in ProcessingAudioState for phone number: {}", command.getPhoneNumber());
+        log.debug("Processing audio in ProcessingAudioState for phone number: {}", command.getFrom());
         
         try {
             // Get audio from WhatsApp
@@ -34,12 +34,12 @@ public class ProcessingAudioState implements FlowState {
             context.setCurrentState("PROCESSING_TEXT");
             context.setPreviousState("PROCESSING_AUDIO");
             
-            whatsappClient.sendMessage(command.getPhoneNumber(), 
+            whatsappClient.sendMessage(command.getFrom(),
                 "Audio procesado correctamente. Procesando la información...");
         } catch (Exception e) {
             log.error("Error processing audio: {}", e.getMessage(), e);
             context.setCurrentState("INITIAL");
-            whatsappClient.sendMessage(command.getPhoneNumber(), 
+            whatsappClient.sendMessage(command.getFrom(),
                 "Lo siento, hubo un error procesando tu audio. Por favor, intenta de nuevo.");
         }
     }
