@@ -14,20 +14,20 @@ import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
+import java.util.Base64;
 
 @Component
 @Slf4j
 @RequiredArgsConstructor
 public class WsaaClientImpl implements WsaaClient {
 
-    @Value("${arca.wsaa.p12.path}")
-    private String p12Path;
-    @Value("${arca.wsaa.p12.path}")
-    private String p12Password;
+    @Value("${arca.p12.base64}")
+    private String p12Base64;
+    @Value("${arca.p12.password}")
+    private String password;
     @Value("${arca.cuit}")
     private String cuit;
 
@@ -62,10 +62,12 @@ public class WsaaClientImpl implements WsaaClient {
     }
 
     private byte[] signTRA(String traXml) throws Exception {
+        byte[] p12Bytes = Base64.getDecoder().decode(p12Base64);
+
         KeyStore ks = KeyStore.getInstance("PKCS12");
-        ks.load(new FileInputStream(p12Path), p12Password.toCharArray());
+        ks.load(new ByteArrayInputStream(p12Bytes), password.toCharArray());
         String alias = ks.aliases().nextElement();
-        PrivateKey privateKey = (PrivateKey) ks.getKey(alias, p12Password.toCharArray());
+        PrivateKey privateKey = (PrivateKey) ks.getKey(alias, password.toCharArray());
         X509Certificate cert = (X509Certificate) ks.getCertificate(alias);
 
         // Firma el XML con BouncyCastle o lib propia...
