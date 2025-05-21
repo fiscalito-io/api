@@ -21,7 +21,7 @@ public class InitialSignUpState implements FlowState {
 
         if (MessageType.TEXT.name().equals(command.getType().name())) {
             context.setCurrentState("SIGN_UP_NAME");
-            context.setPreviousState("INITIAL");
+            context.setPreviousState("INITIAL_SIGN_UP");
             whatsappClient.sendMessage(command.getFrom(),
                     "¡Bienvenido! Para comenzar, por favor ingresa tu nombre completo.");
         } else {
@@ -32,6 +32,6 @@ public class InitialSignUpState implements FlowState {
 
     @Override
     public String getStateName() {
-        return "INITIAL";
+        return "INITIAL_SIGN_UP";
     }
 } 

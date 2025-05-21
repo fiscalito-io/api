@@ -9,14 +9,21 @@ import online.tufactura.api.domain.ports.outbound.FlowRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class FlowExecutor {
     private final FlowRepository flowRepository;
     private final Map<String, FlowState> flowStates;
+
+    public FlowExecutor(FlowRepository flowRepository, List<FlowState> flowStates) {
+        this.flowRepository = flowRepository;
+        this.flowStates = flowStates.stream()
+                .collect(Collectors.toMap(FlowState::getStateName, state -> state));
+    }
 
     public void execute(FlowCommand command) {
         log.debug("Executing flow command: {} for phone number: {}", command.getType(), command.getFrom());
@@ -37,10 +44,11 @@ public class FlowExecutor {
 
     private FlowContext createNewContext(String phoneNumber) {
         log.debug("Creating new flow context for phone number: {}", phoneNumber);
-        return FlowContext.builder()
+        var flowContext = FlowContext.builder()
                 .phoneNumber(phoneNumber)
                 .currentState("INITIAL")
                 .lastUpdated(LocalDateTime.now())
                 .build();
+        return flowContext;
     }
 } 
