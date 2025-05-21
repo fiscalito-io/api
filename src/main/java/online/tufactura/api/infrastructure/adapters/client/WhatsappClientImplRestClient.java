@@ -1,5 +1,6 @@
 package online.tufactura.api.infrastructure.adapters.client;
 
+import lombok.extern.slf4j.Slf4j;
 import online.tufactura.api.application.ports.outbound.client.WhatsappClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
@@ -17,11 +18,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@Slf4j
 public class WhatsappClientImplRestClient implements WhatsappClient {
 
     private final RestTemplate restTemplate;
     private final String whatsappApiUrl;
     private final String whatsappToken;
+    @Value("${me.whatsapp.phone}")
+    private String phone;
 
     public WhatsappClientImplRestClient(
             @Value("${whatsapp.api.url}") String whatsappApiUrl,
@@ -35,24 +39,34 @@ public class WhatsappClientImplRestClient implements WhatsappClient {
     public boolean sendMessage(String phoneNumber, String message) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setBearerAuth(whatsappToken);
+        headers.setBearerAuth(whatsappToken); // debe ser: Bearer <ACCESS_TOKEN>
 
         Map<String, Object> body = new HashMap<>();
         body.put("messaging_product", "whatsapp");
-        body.put("to", phoneNumber);
+        //TODO replace at prod
+        body.put("to", phone);
         body.put("type", "text");
-        
+
         Map<String, String> text = new HashMap<>();
         text.put("body", message);
         body.put("text", text);
 
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
-        
+
         try {
-            restTemplate.postForEntity(whatsappApiUrl + "/messages", request, String.class);
-            return true;
+            ResponseEntity<String> response = restTemplate.postForEntity(
+                    whatsappApiUrl + "/570998156107118" +"/messages", request, String.class
+            );
+
+            if (response.getStatusCode().is2xxSuccessful()) {
+                log.info("✅ Mensaje enviado a {}", phoneNumber);
+                return true;
+            } else {
+                log.warn("⚠️ Fallo al enviar mensaje: HTTP {}", response.getStatusCode());
+                return false;
+            }
         } catch (Exception e) {
-            // Log the error
+            log.error("❌ Error enviando mensaje a {}: {}", phoneNumber, e.getMessage(), e);
             return false;
         }
     }

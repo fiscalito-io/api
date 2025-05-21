@@ -3,7 +3,9 @@ package online.tufactura.api.infrastructure.adapters.workflow.states;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import online.tufactura.api.application.ports.outbound.client.WhatsappClient;
+import online.tufactura.api.application.ports.outbound.repository.UserRepository;
 import online.tufactura.api.domain.FlowContext;
+import online.tufactura.api.domain.MessageType;
 import online.tufactura.api.domain.flow.FlowCommand;
 import online.tufactura.api.application.ports.inbound.workflow.FlowState;
 import org.springframework.stereotype.Component;
@@ -13,12 +15,20 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class InitialState implements FlowState {
     private final WhatsappClient whatsappClient;
+    private final UserRepository userRepository;
 
     @Override
     public void handle(FlowContext context, FlowCommand command) {
         log.debug("Handling command in InitialState for phone number: {}", command.getFrom());
-
-        if ("AUDIO".equals(command.getType())) {
+        userRepository.findUserByPhoneNumber(command.getFrom())
+                .ifPresentOrElse(user -> {
+                    log.info("User found: {}", user);
+                    context.setCurrentState("INITIAL_STATE_INVOICING");
+                }, () -> {
+                    log.warn("User not found for phone number: {}", command.getFrom());
+                    context.setCurrentState("INITIAL_SIGN_UP");
+                });
+        if (MessageType.AUDIO.equals(command.getType())) {
             // Process audio message
             context.setCurrentState("PROCESSING_AUDIO");
             context.setPreviousState("INITIAL");

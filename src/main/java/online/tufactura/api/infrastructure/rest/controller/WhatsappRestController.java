@@ -8,6 +8,7 @@ import online.tufactura.api.domain.flow.FlowCommand;
 import online.tufactura.api.infrastructure.adapters.services.FlowExecutor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,9 +46,8 @@ public class WhatsappRestController {
         }
     }
 
-    // Recepción de mensajes (POST)
-    @PostMapping
-    public ResponseEntity<Void> receiveMessage(@RequestBody Map<String, Object> payload) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, String>> receiveMessage(@RequestBody Map<String, Object> payload) {
         try {
             List<Map<String, Object>> entries = (List<Map<String, Object>>) payload.get("entry");
             for (Map<String, Object> entry : entries) {
@@ -60,6 +60,7 @@ public class WhatsappRestController {
                         for (Map<String, Object> message : messages) {
                             String from = (String) message.get("from");
                             String type = (String) message.get("type");
+                            String messageId = (String) message.get("id");
 
                             String text = null;
                             String audioId = null;
@@ -77,6 +78,8 @@ public class WhatsappRestController {
                                     .messageProvider(MessageProvider.WHATSAPP)
                                     .from(from)
                                     .type(resolveType(type))
+                                    .payload("text".equals(type) ? text : audioId)
+                                    .messageId(messageId)
                                     .build());
                         }
                     }
@@ -84,9 +87,11 @@ public class WhatsappRestController {
             }
         } catch (Exception e) {
             log.error("Error procesando mensaje de WhatsApp", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Error processing message"));
         }
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(Map.of("status", "success"));
     }
 
     private MessageType resolveType(String type) {

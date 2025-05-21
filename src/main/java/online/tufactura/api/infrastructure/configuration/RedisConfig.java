@@ -1,5 +1,6 @@
 package online.tufactura.api.infrastructure.configuration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,12 +14,14 @@ import online.tufactura.api.domain.FlowContext;
 @RequiredArgsConstructor
 public class RedisConfig {
     
+    private final ObjectMapper objectMapper;
+    
     @Bean
     public RedisTemplate<String, FlowContext> redisTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<String, FlowContext> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
         template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        template.setValueSerializer(new GenericJackson2JsonRedisSerializer(objectMapper));
         return template;
     }
 } 

@@ -10,5 +10,7 @@ public interface UserRepository {
 
     Optional<UserModel> findByProviderAndProviderId(AuthenticationProvider provider, String providerId);
 
+    Optional<UserModel> findUserByPhoneNumber(String from);
+
     UserModel saveUser(UserModel user);
 }
