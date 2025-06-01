@@ -1,10 +1,11 @@
-package online.tufactura.api.domain;
+package online.tufactura.api.domain.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import online.tufactura.api.domain.SoftDeleteModel;
 
 import java.time.Instant;
 

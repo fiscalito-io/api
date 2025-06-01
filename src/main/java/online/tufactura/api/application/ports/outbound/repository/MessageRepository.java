@@ -1,6 +1,6 @@
-package online.tufactura.api.domain.ports.outbound;
+package online.tufactura.api.application.ports.outbound.repository;
 
-import online.tufactura.api.domain.MessageModel;
+import online.tufactura.api.domain.messages.MessageModel;
 
 import java.util.Optional;
 

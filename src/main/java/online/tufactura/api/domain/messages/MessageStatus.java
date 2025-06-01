@@ -1,4 +1,4 @@
-package online.tufactura.api.domain;
+package online.tufactura.api.domain.messages;
 
 public enum MessageStatus {
     PENDING,

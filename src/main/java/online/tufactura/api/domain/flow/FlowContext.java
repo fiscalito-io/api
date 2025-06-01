@@ -1,4 +1,4 @@
-package online.tufactura.api.domain;
+package online.tufactura.api.domain.flow;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;

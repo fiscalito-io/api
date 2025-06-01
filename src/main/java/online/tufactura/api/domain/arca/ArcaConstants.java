@@ -1,4 +1,4 @@
-package online.tufactura.api.domain;
+package online.tufactura.api.domain.arca;
 
 public final class ArcaConstants {
     private ArcaConstants() {

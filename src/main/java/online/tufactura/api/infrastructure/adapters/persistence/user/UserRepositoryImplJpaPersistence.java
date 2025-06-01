@@ -3,8 +3,8 @@ package online.tufactura.api.infrastructure.adapters.persistence.user;
 import lombok.RequiredArgsConstructor;
 import online.tufactura.api.application.ports.mapper.user.UserMapper;
 import online.tufactura.api.application.ports.outbound.repository.UserRepository;
-import online.tufactura.api.domain.AuthenticationProvider;
-import online.tufactura.api.domain.UserModel;
+import online.tufactura.api.domain.user.AuthenticationProvider;
+import online.tufactura.api.domain.user.UserModel;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

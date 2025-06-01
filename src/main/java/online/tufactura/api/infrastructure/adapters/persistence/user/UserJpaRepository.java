@@ -1,6 +1,6 @@
 package online.tufactura.api.infrastructure.adapters.persistence.user;
 
-import online.tufactura.api.domain.AuthenticationProvider;
+import online.tufactura.api.domain.user.AuthenticationProvider;
 import online.tufactura.api.infrastructure.adapters.entity.user.UserEntity;
 import online.tufactura.api.infrastructure.adapters.persistence.SoftDeleteBeanJpaRepository;
 import org.springframework.stereotype.Repository;

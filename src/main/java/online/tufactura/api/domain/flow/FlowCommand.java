@@ -2,8 +2,8 @@ package online.tufactura.api.domain.flow;
 
 import lombok.Builder;
 import lombok.Data;
-import online.tufactura.api.domain.MessageProvider;
-import online.tufactura.api.domain.MessageType;
+import online.tufactura.api.domain.messages.MessageProvider;
+import online.tufactura.api.domain.messages.MessageType;
 
 @Data
 @Builder

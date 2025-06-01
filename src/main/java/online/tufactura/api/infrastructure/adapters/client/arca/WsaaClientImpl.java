@@ -7,7 +7,7 @@ import jakarta.xml.soap.SOAPMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import online.tufactura.api.application.ports.outbound.client.arca.WsaaClient;
-import online.tufactura.api.domain.ArcaConstants;
+import online.tufactura.api.domain.arca.ArcaConstants;
 import online.tufactura.api.domain.arca.TokenAuthorization;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

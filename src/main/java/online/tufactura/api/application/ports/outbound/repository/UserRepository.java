@@ -1,7 +1,7 @@
 package online.tufactura.api.application.ports.outbound.repository;
 
-import online.tufactura.api.domain.AuthenticationProvider;
-import online.tufactura.api.domain.UserModel;
+import online.tufactura.api.domain.user.AuthenticationProvider;
+import online.tufactura.api.domain.user.UserModel;
 
 import java.util.Optional;
 

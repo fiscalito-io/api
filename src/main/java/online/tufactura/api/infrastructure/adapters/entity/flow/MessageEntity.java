@@ -12,9 +12,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import online.tufactura.api.domain.MessageDirection;
-import online.tufactura.api.domain.MessageStatus;
-import online.tufactura.api.domain.MessageType;
+import online.tufactura.api.domain.messages.MessageDirection;
+import online.tufactura.api.domain.messages.MessageStatus;
+import online.tufactura.api.domain.messages.MessageType;
 import online.tufactura.api.infrastructure.adapters.entity.BaseBean;
 
 @Entity(name = "messages")

@@ -9,8 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import online.tufactura.api.domain.AuthenticationProvider;
-import online.tufactura.api.domain.UserRole;
+import online.tufactura.api.domain.user.AuthenticationProvider;
+import online.tufactura.api.domain.user.UserRole;
 import online.tufactura.api.infrastructure.adapters.entity.SoftDeleteBean;
 
 import java.time.Instant;

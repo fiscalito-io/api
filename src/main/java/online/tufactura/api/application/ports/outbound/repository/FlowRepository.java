@@ -1,6 +1,6 @@
-package online.tufactura.api.domain.ports.outbound;
+package online.tufactura.api.application.ports.outbound.repository;
 
-import online.tufactura.api.domain.FlowContext;
+import online.tufactura.api.domain.flow.FlowContext;
 import java.util.Optional;
 
 public interface FlowRepository {

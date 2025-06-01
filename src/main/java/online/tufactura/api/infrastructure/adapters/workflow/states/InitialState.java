@@ -4,17 +4,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import online.tufactura.api.application.ports.outbound.client.WhatsappClient;
 import online.tufactura.api.application.ports.outbound.repository.UserRepository;
-import online.tufactura.api.domain.FlowContext;
-import online.tufactura.api.domain.FlowStateEnum;
-import online.tufactura.api.domain.MessageType;
+import online.tufactura.api.domain.flow.FlowContext;
+import online.tufactura.api.domain.flow.FlowStateEnum;
+import online.tufactura.api.domain.messages.MessageType;
 import online.tufactura.api.domain.flow.FlowCommand;
 import online.tufactura.api.application.ports.inbound.workflow.FlowState;
 import org.springframework.stereotype.Component;
 
-import static online.tufactura.api.domain.FlowStateEnum.INITIAL;
-import static online.tufactura.api.domain.FlowStateEnum.INITIAL_SIGN_UP;
-import static online.tufactura.api.domain.FlowStateEnum.INITIAL_STATE_INVOICING;
-import static online.tufactura.api.domain.FlowStateEnum.PROCESSING_AUDIO;
+import static online.tufactura.api.domain.flow.FlowStateEnum.INITIAL;
+import static online.tufactura.api.domain.flow.FlowStateEnum.INITIAL_SIGN_UP;
+import static online.tufactura.api.domain.flow.FlowStateEnum.INITIAL_STATE_INVOICING;
+import static online.tufactura.api.domain.flow.FlowStateEnum.PROCESSING_AUDIO;
 
 @Slf4j
 @Component

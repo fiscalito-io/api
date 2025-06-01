@@ -2,8 +2,8 @@ package online.tufactura.api.infrastructure.rest.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import online.tufactura.api.domain.MessageProvider;
-import online.tufactura.api.domain.MessageType;
+import online.tufactura.api.domain.messages.MessageProvider;
+import online.tufactura.api.domain.messages.MessageType;
 import online.tufactura.api.domain.flow.FlowCommand;
 import online.tufactura.api.infrastructure.adapters.services.FlowExecutor;
 import org.springframework.beans.factory.annotation.Value;

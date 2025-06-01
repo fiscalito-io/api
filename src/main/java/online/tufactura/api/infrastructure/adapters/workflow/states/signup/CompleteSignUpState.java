@@ -3,13 +3,13 @@ package online.tufactura.api.infrastructure.adapters.workflow.states.signup;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import online.tufactura.api.application.ports.outbound.client.WhatsappClient;
-import online.tufactura.api.domain.FlowContext;
-import online.tufactura.api.domain.FlowStateEnum;
+import online.tufactura.api.domain.flow.FlowContext;
+import online.tufactura.api.domain.flow.FlowStateEnum;
 import online.tufactura.api.domain.flow.FlowCommand;
 import online.tufactura.api.application.ports.inbound.workflow.FlowState;
 import org.springframework.stereotype.Component;
 
-import static online.tufactura.api.domain.FlowStateEnum.SIGN_UP_COMPLETE;
+import static online.tufactura.api.domain.flow.FlowStateEnum.SIGN_UP_COMPLETE;
 
 @Slf4j
 @Component

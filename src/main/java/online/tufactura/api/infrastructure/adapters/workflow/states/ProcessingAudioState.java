@@ -5,16 +5,16 @@ import lombok.extern.slf4j.Slf4j;
 import online.tufactura.api.application.ports.inbound.workflow.FlowState;
 import online.tufactura.api.application.ports.outbound.client.WhatsappClient;
 import online.tufactura.api.application.ports.outbound.client.WhisperClient;
-import online.tufactura.api.domain.FlowContext;
-import online.tufactura.api.domain.FlowStateEnum;
+import online.tufactura.api.domain.flow.FlowContext;
+import online.tufactura.api.domain.flow.FlowStateEnum;
 import online.tufactura.api.domain.flow.FlowCommand;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 
-import static online.tufactura.api.domain.FlowStateEnum.FINISHED_ERROR;
-import static online.tufactura.api.domain.FlowStateEnum.PROCESSING_AUDIO;
-import static online.tufactura.api.domain.FlowStateEnum.PROCESSING_TEXT;
+import static online.tufactura.api.domain.flow.FlowStateEnum.FINISHED_ERROR;
+import static online.tufactura.api.domain.flow.FlowStateEnum.PROCESSING_AUDIO;
+import static online.tufactura.api.domain.flow.FlowStateEnum.PROCESSING_TEXT;
 
 @Slf4j
 @Component

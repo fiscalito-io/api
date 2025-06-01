@@ -2,7 +2,7 @@ package online.tufactura.api.infrastructure.security;
 
 import lombok.RequiredArgsConstructor;
 import online.tufactura.api.application.ports.outbound.repository.UserRepository;
-import online.tufactura.api.domain.UserModel;
+import online.tufactura.api.domain.user.UserModel;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,7 +1,7 @@
 package online.tufactura.api.infrastructure.adapters.mapper.user;
 
 import online.tufactura.api.application.ports.mapper.user.UserMapper;
-import online.tufactura.api.domain.UserModel;
+import online.tufactura.api.domain.user.UserModel;
 import online.tufactura.api.infrastructure.adapters.entity.user.UserEntity;
 import online.tufactura.api.infrastructure.configuration.MapStructConfig;
 import org.mapstruct.Mapper;

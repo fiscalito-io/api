@@ -4,12 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import online.tufactura.api.application.ports.inbound.workflow.FlowState;
-import online.tufactura.api.domain.FlowContext;
-import online.tufactura.api.domain.FlowStateEnum;
-import online.tufactura.api.domain.MessageModel;
+import online.tufactura.api.domain.flow.FlowContext;
+import online.tufactura.api.domain.flow.FlowStateEnum;
+import online.tufactura.api.domain.messages.MessageModel;
 import online.tufactura.api.domain.flow.FlowCommand;
-import online.tufactura.api.domain.ports.outbound.FlowRepository;
-import online.tufactura.api.domain.ports.outbound.MessageRepository;
+import online.tufactura.api.application.ports.outbound.repository.FlowRepository;
+import online.tufactura.api.application.ports.outbound.repository.MessageRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static online.tufactura.api.domain.FlowStateEnum.FINISHED;
-import static online.tufactura.api.domain.FlowStateEnum.FINISHED_ERROR;
-import static online.tufactura.api.domain.FlowStateEnum.INITIAL;
+import static online.tufactura.api.domain.flow.FlowStateEnum.FINISHED;
+import static online.tufactura.api.domain.flow.FlowStateEnum.FINISHED_ERROR;
+import static online.tufactura.api.domain.flow.FlowStateEnum.INITIAL;
 
 @Slf4j
 @Service

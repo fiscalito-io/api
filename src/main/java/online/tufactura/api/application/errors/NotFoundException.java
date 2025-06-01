@@ -1,6 +1,6 @@
 package online.tufactura.api.application.errors;
 
-public class NotFoundException extends FacturaOnlineException {
+public class NotFoundException extends FiscalitoException {
     public NotFoundException(String message, String code, String detail) {
         super(message, code, 404, detail);
     }

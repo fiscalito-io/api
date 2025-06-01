@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import online.tufactura.api.domain.MessageProvider;
-import online.tufactura.api.domain.WorkflowType;
+import online.tufactura.api.domain.messages.MessageProvider;
+import online.tufactura.api.domain.flow.WorkflowType;
 import online.tufactura.api.infrastructure.adapters.entity.BaseBean;
 
 

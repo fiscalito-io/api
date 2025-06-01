@@ -1,18 +1,17 @@
 package online.tufactura.api.infrastructure.rest.controller.advice;
 
-import online.tufactura.api.application.errors.FacturaOnlineException;
+import online.tufactura.api.application.errors.FiscalitoException;
 import online.tufactura.api.infrastructure.rest.response.error.TuFacturaOnlineError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class TuFacturaOnlineRestControllerAdvice {
 
-    @ExceptionHandler(FacturaOnlineException.class)
-    public ResponseEntity<TuFacturaOnlineError> handleFacturaOnlineException(FacturaOnlineException ex) {
+    @ExceptionHandler(FiscalitoException.class)
+    public ResponseEntity<TuFacturaOnlineError> handleFacturaOnlineException(FiscalitoException ex) {
         //TODO use i18n to get the codes.
         return ResponseEntity.status(ex.getHttpStatusCode()).body(
                 TuFacturaOnlineError.builder()

@@ -7,13 +7,13 @@ import lombok.extern.slf4j.Slf4j;
 import online.tufactura.api.application.ports.inbound.workflow.FlowState;
 import online.tufactura.api.application.ports.outbound.client.WhatsappClient;
 import online.tufactura.api.application.ports.outbound.client.arca.ArcaClient;
-import online.tufactura.api.domain.FlowContext;
-import online.tufactura.api.domain.FlowStateEnum;
+import online.tufactura.api.domain.flow.FlowContext;
+import online.tufactura.api.domain.flow.FlowStateEnum;
 import online.tufactura.api.domain.flow.FlowCommand;
 import org.springframework.stereotype.Component;
 
-import static online.tufactura.api.domain.FlowStateEnum.EASY_INVOICE;
-import static online.tufactura.api.domain.FlowStateEnum.INVOICE_SENT;
+import static online.tufactura.api.domain.flow.FlowStateEnum.EASY_INVOICE;
+import static online.tufactura.api.domain.flow.FlowStateEnum.INVOICE_SENT;
 
 @Component
 @RequiredArgsConstructor

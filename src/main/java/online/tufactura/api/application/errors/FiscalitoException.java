@@ -1,13 +1,13 @@
 package online.tufactura.api.application.errors;
 
-public abstract class FacturaOnlineException extends RuntimeException {
+public abstract class FiscalitoException extends RuntimeException {
 
     private String message;
     private String code;
     private Integer httpStatusCode;
     private String detail;
 
-    public FacturaOnlineException(String message, String code, Integer httpStatusCode, String detail) {
+    public FiscalitoException(String message, String code, Integer httpStatusCode, String detail) {
         super("message: " + message + "detail: " + detail);
         this.message = message;
         this.code = code;

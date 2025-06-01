@@ -1,4 +1,4 @@
-package online.tufactura.api.domain;
+package online.tufactura.api.domain.flow;
 
 public enum FlowStateEnum {
     INITIAL,
