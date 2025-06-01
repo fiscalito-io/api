@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface SignUpRepository {
     void save(UserModel user);
 
-    Optional<UserModel> findByPhoneNumber(String email);
+    Optional<UserModel> findByPhoneNumber(String phoneNumber);
 
     void delete(String phoneNumber);
 }
