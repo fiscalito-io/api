@@ -2,26 +2,42 @@ package online.tufactura.api.infrastructure.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import online.tufactura.api.domain.FlowContext;
+import online.tufactura.api.domain.MessageModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import online.tufactura.api.domain.FlowContext;
 
 @Configuration
 @RequiredArgsConstructor
 public class RedisConfig {
     
-    private final ObjectMapper objectMapper;
-    
     @Bean
-    public RedisTemplate<String, FlowContext> redisTemplate(RedisConnectionFactory connectionFactory) {
+    public RedisTemplate<String, FlowContext> flowRedisTemplate(RedisConnectionFactory connectionFactory, ObjectMapper objectMapper) {
         RedisTemplate<String, FlowContext> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
         template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(new GenericJackson2JsonRedisSerializer(objectMapper));
+
+        Jackson2JsonRedisSerializer<FlowContext> valueSerializer =
+                new Jackson2JsonRedisSerializer<>(objectMapper, FlowContext.class);
+        template.setValueSerializer(valueSerializer);
+        template.afterPropertiesSet();
+        return template;
+    }
+
+
+    @Bean
+    public RedisTemplate<String, MessageModel> messageRedisTemplate(RedisConnectionFactory connectionFactory, ObjectMapper objectMapper) {
+        RedisTemplate<String, MessageModel> template = new RedisTemplate<>();
+        template.setConnectionFactory(connectionFactory);
+        template.setKeySerializer(new StringRedisSerializer());
+        Jackson2JsonRedisSerializer<MessageModel> valueSerializer =
+                new Jackson2JsonRedisSerializer<>(objectMapper, MessageModel.class);
+        template.setValueSerializer(valueSerializer);
+        template.afterPropertiesSet();
         return template;
     }
 } 

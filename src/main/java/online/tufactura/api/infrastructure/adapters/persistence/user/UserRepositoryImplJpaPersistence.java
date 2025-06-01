@@ -28,6 +28,12 @@ public class UserRepositoryImplJpaPersistence implements UserRepository {
     }
 
     @Override
+    public Optional<UserModel> findUserByPhoneNumber(String phoneNumber) {
+        var optUserEntity = this.userRepository.findByPhoneNumber(phoneNumber);
+        return optUserEntity.map(userMapper::toModel);
+    }
+
+    @Override
     public UserModel saveUser(UserModel user) {
         return userMapper.toModel(
                 this.userRepository.save(userMapper.toEntity(user))

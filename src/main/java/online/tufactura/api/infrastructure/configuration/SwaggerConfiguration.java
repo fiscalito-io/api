@@ -17,7 +17,7 @@ public class SwaggerConfiguration {
     @Bean
     public OpenAPI api() {
         return new OpenAPI()
-                .info(new Info().title("Facturita online").description("Facturita.online API"))
+                .info(new Info().title("Fiscalito").description("ficalito.io API"))
                 .servers(List.of(new Server().url("/")))
                 .components(new Components()
                         .addSecuritySchemes("Authentication", new SecurityScheme()

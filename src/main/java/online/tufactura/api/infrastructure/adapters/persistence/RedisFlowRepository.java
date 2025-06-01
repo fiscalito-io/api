@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class RedisFlowRepository implements FlowRepository {
     private static final String KEY_PREFIX = "flow:";
-    private static final long EXPIRATION_TIME = 24; // hours
+    private static final long EXPIRATION_TIME = 10; // minutes
 
     private final RedisTemplate<String, FlowContext> redisTemplate;
 
@@ -23,7 +23,7 @@ public class RedisFlowRepository implements FlowRepository {
     public void save(FlowContext context) {
         String key = KEY_PREFIX + context.getPhoneNumber();
         log.debug("Saving flow context for phone number: {}", context.getPhoneNumber());
-        redisTemplate.opsForValue().set(key, context, EXPIRATION_TIME, TimeUnit.HOURS);
+        redisTemplate.opsForValue().set(key, context, EXPIRATION_TIME, TimeUnit.MINUTES);
     }
 
     @Override

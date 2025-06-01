@@ -29,6 +29,7 @@ public class UserEntity extends SoftDeleteBean {
     private String providerId;
 
     @Column(name = "provider")
+    @Enumerated(EnumType.STRING)
     private AuthenticationProvider provider;
 
     @Column(name = "name")

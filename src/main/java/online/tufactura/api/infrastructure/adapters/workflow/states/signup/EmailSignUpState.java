@@ -1,15 +1,19 @@
-package online.tufactura.api.infrastructure.adapters.workflow.states.SignUpFlow;
+package online.tufactura.api.infrastructure.adapters.workflow.states.signup;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import online.tufactura.api.application.ports.outbound.client.WhatsappClient;
 import online.tufactura.api.domain.FlowContext;
+import online.tufactura.api.domain.FlowStateEnum;
 import online.tufactura.api.domain.flow.FlowCommand;
 import online.tufactura.api.application.ports.inbound.workflow.FlowState;
 import online.tufactura.api.domain.flow.MessageType;
 import org.springframework.stereotype.Component;
 
 import java.util.regex.Pattern;
+
+import static online.tufactura.api.domain.FlowStateEnum.SIGN_UP_COMPANY_NAME;
+import static online.tufactura.api.domain.FlowStateEnum.SIGN_UP_EMAIL;
 
 @Slf4j
 @Component
@@ -19,7 +23,7 @@ public class EmailSignUpState implements FlowState {
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
 
     @Override
-    public void handle(FlowContext context, FlowCommand command) {
+    public FlowContext handle(FlowContext context, FlowCommand command) {
         log.debug("Handling email collection state for: {}", command.getFrom());
         
         if ( MessageType.TEXT.name().equals(command.getType().name())) {
@@ -27,10 +31,10 @@ public class EmailSignUpState implements FlowState {
             if (isValidEmail(email)) {
                 // Store email in context data
                 context.setData(email);
-                context.setCurrentState("SIGN_UP_COMPANY");
-                context.setPreviousState("SIGN_UP_EMAIL");
+                context.setCurrentState(SIGN_UP_COMPANY_NAME);
+                context.setPreviousState(SIGN_UP_EMAIL);
                 whatsappClient.sendMessage(command.getFrom(), 
-                    "Gracias. Ahora, por favor ingresa el nombre de tu empresa.");
+                    "Gracias. Ahora, por favor ingresa tu nombre o razon social.");
             } else {
                 whatsappClient.sendMessage(command.getFrom(), 
                     "Por favor, ingresa un email válido.");
@@ -39,6 +43,7 @@ public class EmailSignUpState implements FlowState {
             whatsappClient.sendMessage(command.getFrom(), 
                 "Por favor, envía un mensaje de texto con tu email.");
         }
+        return context;
     }
 
     private boolean isValidEmail(String email) {
@@ -46,7 +51,7 @@ public class EmailSignUpState implements FlowState {
     }
 
     @Override
-    public String getStateName() {
-        return "SIGN_UP_EMAIL";
+    public FlowStateEnum getFlowState() {
+        return SIGN_UP_EMAIL;
     }
 } 
