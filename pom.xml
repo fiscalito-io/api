@@ -8,17 +8,21 @@
 		<version>3.4.5</version>
 		<relativePath/>
 	</parent>
-	<groupId>online.tufactura</groupId>
+	<groupId>io.fiscalito</groupId>
 	<artifactId>api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>api</name>
-	<description>API monolith for tufactura.online</description>
+	<description>API monolith for fiscalito.io</description>
 	<url/>
 	<licenses>
 		<license/>
 	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+			<id>kimos.io</id>
+			<name>Kimos Team</name>
+			<email>hi@kimos.io</email>
+		</developer>
 	</developers>
 	<scm>
 		<connection/>
