@@ -1,9 +1,9 @@
 package io.fiscalito.api.infrastructure.adapters.persistence.message;
 
+import io.fiscalito.api.application.ports.outbound.repository.MessageRepository;
+import io.fiscalito.api.domain.messages.MessageModel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import io.fiscalito.api.domain.messages.MessageModel;
-import io.fiscalito.api.application.ports.outbound.repository.MessageRepository;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 

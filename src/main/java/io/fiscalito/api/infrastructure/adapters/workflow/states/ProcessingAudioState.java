@@ -1,13 +1,13 @@
 package io.fiscalito.api.infrastructure.adapters.workflow.states;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import io.fiscalito.api.application.ports.inbound.workflow.FlowState;
 import io.fiscalito.api.application.ports.outbound.client.WhatsappClient;
 import io.fiscalito.api.application.ports.outbound.client.WhisperClient;
+import io.fiscalito.api.domain.flow.FlowCommand;
 import io.fiscalito.api.domain.flow.FlowContext;
 import io.fiscalito.api.domain.flow.FlowStateEnum;
-import io.fiscalito.api.domain.flow.FlowCommand;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;

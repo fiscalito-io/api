@@ -1,10 +1,10 @@
 package io.fiscalito.api.infrastructure.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
 import io.fiscalito.api.domain.flow.FlowContext;
 import io.fiscalito.api.domain.messages.MessageModel;
 import io.fiscalito.api.domain.user.UserModel;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;

@@ -1,12 +1,13 @@
 package io.fiscalito.api.infrastructure.adapters.persistence.user;
 
-import lombok.RequiredArgsConstructor;
 import io.fiscalito.api.application.ports.mapper.user.UserMapper;
 import io.fiscalito.api.application.ports.outbound.repository.UserRepository;
 import io.fiscalito.api.domain.user.AuthenticationProvider;
 import io.fiscalito.api.domain.user.UserModel;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -38,5 +39,12 @@ public class UserRepositoryImplJpaPersistence implements UserRepository {
         return userMapper.toModel(
                 this.userRepository.save(userMapper.toEntity(user))
         );
+    }
+
+    @Override
+    public List<UserModel> findByEmailOrPhoneNumber(String email, String phoneNumber) {
+        return userRepository.findByEmailOrPhoneNumber(email, phoneNumber).stream()
+                .map(userMapper::toModel)
+                .toList();
     }
 }

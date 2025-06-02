@@ -5,6 +5,7 @@ import io.fiscalito.api.infrastructure.adapters.entity.user.UserEntity;
 import io.fiscalito.api.infrastructure.adapters.persistence.SoftDeleteBeanJpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -14,4 +15,6 @@ public interface UserJpaRepository extends SoftDeleteBeanJpaRepository<UserEntit
     Optional<UserEntity> findByProviderAndProviderId(AuthenticationProvider provider, String id);
 
     Optional<UserEntity> findByPhoneNumber(String phoneNumber);
+
+    List<UserEntity> findByEmailOrPhoneNumber(String email, String phoneNumber);
 }

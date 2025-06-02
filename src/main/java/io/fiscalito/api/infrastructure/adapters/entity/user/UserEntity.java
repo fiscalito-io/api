@@ -1,5 +1,8 @@
 package io.fiscalito.api.infrastructure.adapters.entity.user;
 
+import io.fiscalito.api.domain.user.AuthenticationProvider;
+import io.fiscalito.api.domain.user.UserRole;
+import io.fiscalito.api.infrastructure.adapters.entity.SoftDeleteBean;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,9 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import io.fiscalito.api.domain.user.AuthenticationProvider;
-import io.fiscalito.api.domain.user.UserRole;
-import io.fiscalito.api.infrastructure.adapters.entity.SoftDeleteBean;
 
 import java.time.Instant;
 
@@ -24,6 +24,9 @@ import java.time.Instant;
 public class UserEntity extends SoftDeleteBean {
     @Column(name = "email")
     private String email;
+
+    @Column(name = "company_name")
+    private String companyName;
 
     @Column(name = "provider_id")
     private String providerId;

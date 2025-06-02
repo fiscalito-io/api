@@ -2,14 +2,14 @@ package io.fiscalito.api.infrastructure.adapters.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
 import io.fiscalito.api.application.ports.inbound.workflow.FlowState;
+import io.fiscalito.api.application.ports.outbound.repository.FlowRepository;
+import io.fiscalito.api.application.ports.outbound.repository.MessageRepository;
+import io.fiscalito.api.domain.flow.FlowCommand;
 import io.fiscalito.api.domain.flow.FlowContext;
 import io.fiscalito.api.domain.flow.FlowStateEnum;
 import io.fiscalito.api.domain.messages.MessageModel;
-import io.fiscalito.api.domain.flow.FlowCommand;
-import io.fiscalito.api.application.ports.outbound.repository.FlowRepository;
-import io.fiscalito.api.application.ports.outbound.repository.MessageRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -50,7 +50,6 @@ public class FlowExecutor {
                         .phoneNumber(command.getFrom())
                                 .provider(command.getMessageProvider())
                         .jsonData(objectMapper.writeValueAsString(command))
-
                         .build());
             } catch (JsonProcessingException e) {
                 //TODO handle error more gracefully
@@ -71,9 +70,9 @@ public class FlowExecutor {
             context.setLastUpdated(Instant.now());
             flowRepository.save(context);
         }
-
         if (context.getCurrentState().equals(FINISHED)) {
             log.info("Flow execution finished for phone number: {}", command.getFrom());
+            flowRepository.delete(command.getFrom());
         }
         if (context.getCurrentState().equals(FINISHED_ERROR)) {
             handleError(context, command);
@@ -82,6 +81,8 @@ public class FlowExecutor {
 
     private void handleError(FlowContext context, FlowCommand command) {
         //TODO implement finalization logic if needed
+        log.error("Flow execution finished with error for phone number: {}", command.getFrom());
+        flowRepository.delete(command.getFrom());
     }
 
     private FlowContext createNewContext(String phoneNumber) {

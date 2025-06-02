@@ -1,11 +1,11 @@
 package io.fiscalito.api.domain.user;
 
+import io.fiscalito.api.domain.SoftDeleteModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import io.fiscalito.api.domain.SoftDeleteModel;
 
 import java.time.Instant;
 
@@ -16,6 +16,7 @@ import java.time.Instant;
 @SuperBuilder
 public class UserModel extends SoftDeleteModel {
     private String email;
+    private String companyName;
     private AuthenticationProvider provider;
     private String providerId;
     private String name;

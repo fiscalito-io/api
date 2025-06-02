@@ -1,13 +1,13 @@
 package io.fiscalito.api.infrastructure.security;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import io.fiscalito.api.application.ports.outbound.repository.UserRepository;
 import io.fiscalito.api.domain.user.AuthenticationProvider;
 import io.fiscalito.api.domain.user.UserModel;
 import io.fiscalito.api.domain.user.UserRole;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;

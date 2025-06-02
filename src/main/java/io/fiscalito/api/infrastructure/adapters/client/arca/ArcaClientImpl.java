@@ -1,11 +1,11 @@
 package io.fiscalito.api.infrastructure.adapters.client.arca;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import io.fiscalito.api.application.ports.outbound.client.arca.ArcaClient;
 import io.fiscalito.api.application.ports.outbound.client.arca.WsaaClient;
 import io.fiscalito.api.application.ports.outbound.client.arca.WsfeClient;
 import io.fiscalito.api.domain.arca.TokenAuthorization;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 //TODO rename this as a service

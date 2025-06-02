@@ -1,9 +1,9 @@
 package io.fiscalito.api.domain.flow;
 
-import lombok.Builder;
-import lombok.Data;
 import io.fiscalito.api.domain.messages.MessageProvider;
 import io.fiscalito.api.domain.messages.MessageType;
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @Builder

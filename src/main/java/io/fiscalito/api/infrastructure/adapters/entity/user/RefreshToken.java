@@ -1,5 +1,6 @@
 package io.fiscalito.api.infrastructure.adapters.entity.user;
 
+import io.fiscalito.api.infrastructure.adapters.entity.BaseBean;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
@@ -7,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import io.fiscalito.api.infrastructure.adapters.entity.BaseBean;
 
 @Entity(name = "refresh_token")
 @AllArgsConstructor

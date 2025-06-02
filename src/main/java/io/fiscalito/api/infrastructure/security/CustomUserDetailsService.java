@@ -1,8 +1,8 @@
 package io.fiscalito.api.infrastructure.security;
 
-import lombok.RequiredArgsConstructor;
 import io.fiscalito.api.application.ports.outbound.repository.UserRepository;
 import io.fiscalito.api.domain.user.UserModel;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

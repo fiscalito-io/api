@@ -1,9 +1,9 @@
 package io.fiscalito.api.infrastructure.adapters.persistence.flow;
 
+import io.fiscalito.api.application.ports.outbound.repository.FlowRepository;
+import io.fiscalito.api.domain.flow.FlowContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import io.fiscalito.api.domain.flow.FlowContext;
-import io.fiscalito.api.application.ports.outbound.repository.FlowRepository;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 

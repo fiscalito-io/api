@@ -2,14 +2,14 @@ package io.fiscalito.api.infrastructure.adapters.workflow.states.invoice;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import io.fiscalito.api.application.ports.inbound.workflow.FlowState;
 import io.fiscalito.api.application.ports.outbound.client.WhatsappClient;
 import io.fiscalito.api.application.ports.outbound.client.arca.ArcaClient;
+import io.fiscalito.api.domain.flow.FlowCommand;
 import io.fiscalito.api.domain.flow.FlowContext;
 import io.fiscalito.api.domain.flow.FlowStateEnum;
-import io.fiscalito.api.domain.flow.FlowCommand;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import static io.fiscalito.api.domain.flow.FlowStateEnum.EASY_INVOICE;

@@ -1,10 +1,10 @@
 package io.fiscalito.api.infrastructure.adapters.workflow.states.invoice;
 
-import lombok.RequiredArgsConstructor;
 import io.fiscalito.api.application.ports.inbound.workflow.FlowState;
+import io.fiscalito.api.domain.flow.FlowCommand;
 import io.fiscalito.api.domain.flow.FlowContext;
 import io.fiscalito.api.domain.flow.FlowStateEnum;
-import io.fiscalito.api.domain.flow.FlowCommand;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import static io.fiscalito.api.domain.flow.FlowStateEnum.INITIAL_AUDIO_INVOICE;

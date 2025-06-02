@@ -8,7 +8,6 @@ import io.fiscalito.api.domain.flow.FlowCommand;
 import io.fiscalito.api.domain.flow.FlowContext;
 import io.fiscalito.api.domain.flow.FlowStateEnum;
 import io.fiscalito.api.domain.flow.MessageType;
-
 import io.fiscalito.api.infrastructure.adapters.workflow.states.BaseState;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

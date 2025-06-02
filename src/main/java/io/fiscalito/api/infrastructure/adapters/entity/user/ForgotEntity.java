@@ -1,5 +1,6 @@
 package io.fiscalito.api.infrastructure.adapters.entity.user;
 
+import io.fiscalito.api.infrastructure.adapters.entity.BaseBean;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,7 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import io.fiscalito.api.infrastructure.adapters.entity.BaseBean;
 
 import java.time.Instant;
 
@@ -35,6 +35,9 @@ public class ForgotEntity extends BaseBean{
 
     @Column(name = "used_at")
     private Instant usedAt;
+
+    @Column(name = "user_id", insertable = false, updatable = false)
+    private String userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

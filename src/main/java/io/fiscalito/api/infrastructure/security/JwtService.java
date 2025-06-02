@@ -1,10 +1,10 @@
 package io.fiscalito.api.infrastructure.security;
 
+import io.fiscalito.api.domain.user.UserModel;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import io.fiscalito.api.domain.user.UserModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

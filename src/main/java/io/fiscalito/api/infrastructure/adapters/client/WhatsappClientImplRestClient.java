@@ -1,7 +1,7 @@
 package io.fiscalito.api.infrastructure.adapters.client;
 
-import lombok.extern.slf4j.Slf4j;
 import io.fiscalito.api.application.ports.outbound.client.WhatsappClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpEntity;

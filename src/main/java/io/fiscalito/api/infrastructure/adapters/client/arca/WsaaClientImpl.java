@@ -1,14 +1,14 @@
 package io.fiscalito.api.infrastructure.adapters.client.arca;
 
+import io.fiscalito.api.application.ports.outbound.client.arca.WsaaClient;
+import io.fiscalito.api.domain.arca.ArcaConstants;
+import io.fiscalito.api.domain.arca.TokenAuthorization;
 import jakarta.xml.soap.MessageFactory;
 import jakarta.xml.soap.SOAPConnection;
 import jakarta.xml.soap.SOAPConnectionFactory;
 import jakarta.xml.soap.SOAPMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import io.fiscalito.api.application.ports.outbound.client.arca.WsaaClient;
-import io.fiscalito.api.domain.arca.ArcaConstants;
-import io.fiscalito.api.domain.arca.TokenAuthorization;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
