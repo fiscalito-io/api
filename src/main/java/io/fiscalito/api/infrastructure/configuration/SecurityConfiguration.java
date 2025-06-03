@@ -32,6 +32,7 @@ public class SecurityConfiguration {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/whatsapp/**").permitAll()
+                        .requestMatchers("/api/v1/afip/**").permitAll()
                         .requestMatchers("/api/auth/**", "/api-docs/**", "/swagger-ui/**").permitAll()
                         .anyRequest().authenticated()
                 )

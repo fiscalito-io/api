@@ -4,6 +4,7 @@ import io.fiscalito.api.application.ports.outbound.service.EmailService;
 import io.fiscalito.api.domain.user.ForgotModel;
 import jakarta.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,12 @@ public class EmailServiceImplSMTP implements EmailService {
 
     private final JavaMailSender mailSender;
     private final SpringTemplateEngine templateEngine;
+    private final String appUrl;
 
-    public EmailServiceImplSMTP(JavaMailSender mailSender, SpringTemplateEngine templateEngine) {
+    public EmailServiceImplSMTP(JavaMailSender mailSender, SpringTemplateEngine templateEngine, @Value("${app.url}") String appUrl) {
         this.mailSender = mailSender;
         this.templateEngine = templateEngine;
+        this.appUrl = appUrl;
     }
 
     @Override
@@ -28,9 +31,9 @@ public class EmailServiceImplSMTP implements EmailService {
             Context context = new Context();
             context.setVariable("name", name);
             context.setVariable("expiresAt", forgotPasswordToken.getExpiresAt());
-            context.setVariable("resetLink", "https://fiscalito.io/reset-password?token=" + forgotPasswordToken.getId());
+            context.setVariable("resetLink", this.appUrl+"/reset-password?token=" + forgotPasswordToken.getId());
 
-            String htmlContent = templateEngine.process("email/password-reset", context);
+            String htmlContent = templateEngine.process("email/welcome-set-password", context);
 
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
