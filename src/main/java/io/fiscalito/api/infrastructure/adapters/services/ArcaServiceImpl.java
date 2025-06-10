@@ -24,6 +24,9 @@ public class ArcaServiceImpl implements ArcaService {
     public void createInvoice(io.fiscalito.api.application.command.CreateInvoiceCommand createInvoiceCommand) throws Exception {
         var tokenAuthorization=wsaaClient.getToken();
         var result = wsfeClient.emitInvoice(createInvoiceCommand, tokenAuthorization);
+        List<TipoCbte> tiposCbte = port.feParamGetTiposCbte(auth).getResult().getCbteTipo();
+        List<TipoDoc> tiposDoc = port.feParamGetTiposDoc(auth).getResult().getDocTipo();
+        List<Moneda> monedas = port.feParamGetTiposMonedas(auth).getResult().getMoneda();
         System.out.println("Factura emitida: " + result);
         byte[] pdfBytes = invoicePdfGenerator.generateFromFECAEResponse(result);
         Files.write(Path.of("factura.pdf"), pdfBytes); // Si querés guardarlo en disco
