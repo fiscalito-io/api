@@ -13,6 +13,7 @@ import org.bouncycastle.cms.jcajce.JcaSignerInfoGeneratorBuilder;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -30,11 +31,15 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
+import java.util.concurrent.TimeUnit;
 
 @Component
 @Slf4j
 @RequiredArgsConstructor
 public class WsaaClientImpl implements WsaaClient {
+
+    private final StringRedisTemplate redisTemplate;
+
 
     @Value("${arca.p12.base64}")
     private String p12Base64;
@@ -46,9 +51,15 @@ public class WsaaClientImpl implements WsaaClient {
     private String cuit;
 
     private final RestTemplate restTemplate = new RestTemplate();
+    private static final String TOKEN_KEY = "arca:token";
 
     @Override
     public TokenAuthorization getToken() throws Exception {
+        String cached = redisTemplate.opsForValue().get(TOKEN_KEY);
+        if (cached != null) {
+            String[] parts = cached.split("\\|");
+            return new TokenAuthorization(parts[0], parts[1], cuit);
+        }
         String tra = buildTRA();
         log.debug("TRA XML:\n{}", tra);
 
@@ -59,8 +70,13 @@ public class WsaaClientImpl implements WsaaClient {
         String soapResponse = sendRawSoapRequest(soapRequest, ArcaConstants.WSAA_URL);
 
         log.debug("SOAP Response:\n{}", soapResponse);
-
-        return parseSoapResponse(soapResponse);
+        var response = parseSoapResponse(soapResponse);
+        redisTemplate.opsForValue().set(
+                TOKEN_KEY,
+                response.getToken() + "|" + response.getSign(),
+                10, TimeUnit.MINUTES
+        );
+        return response;
     }
 
     private String buildTRA() {

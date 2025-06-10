@@ -1,8 +1,9 @@
 package io.fiscalito.api.application.ports.outbound.client.arca;
 
+import io.fiscalito.api.application.command.CreateInvoiceCommand;
 import io.fiscalito.api.domain.arca.TokenAuthorization;
+import io.fiscalito.api.domain.arca.wsfev1.FECAEResponse;
 
 public interface WsfeClient {
-    //TODO modify cuit representado por el del cliente y todos los datos (Asumo que va a pedir mas que eso)
-    byte[] emitInvoice(TokenAuthorization auth, String cuitRepresentado);
+    FECAEResponse emitInvoice(CreateInvoiceCommand createInvoiceCommand, TokenAuthorization tokenAuthorization) throws Exception;
 }
