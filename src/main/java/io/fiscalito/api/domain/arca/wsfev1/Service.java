@@ -8,6 +8,8 @@ import jakarta.xml.ws.WebServiceClient;
 import jakarta.xml.ws.WebServiceException;
 import jakarta.xml.ws.WebServiceFeature;
 
+import static io.fiscalito.api.domain.arca.ArcaConstants.WSFE_URL;
+
 
 /**
  * Web Service orientado  al  servicio  de Facturacion electronica RG2485 V1
@@ -17,7 +19,7 @@ import jakarta.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "Service", targetNamespace = "http://ar.gov.afip.dif.FEV1/", wsdlLocation = "https://wswhomo.afip.gov.ar/wsfev1/service.asmx?WSDL")
+@WebServiceClient(name = "Service", targetNamespace = "http://ar.gov.afip.dif.FEV1/", wsdlLocation = WSFE_URL +"?WSDL")
 public class Service
     extends jakarta.xml.ws.Service
 {
@@ -30,7 +32,8 @@ public class Service
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("https://wswhomo.afip.gov.ar/wsfev1/service.asmx?WSDL");
+
+            url = new URL(WSFE_URL +"?WSDL");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

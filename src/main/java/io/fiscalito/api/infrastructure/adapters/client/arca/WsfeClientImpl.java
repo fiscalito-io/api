@@ -40,7 +40,8 @@ public class WsfeClientImpl implements WsfeClient {
     private final WsaaClient wsaaClient;
 
     @Override
-    public FECAEResponse emitInvoice(CreateInvoiceCommand createInvoiceCommand, TokenAuthorization tokenAuthorization) throws Exception {
+    public FECAEResponse emitInvoice(CreateInvoiceCommand createInvoiceCommand) throws Exception {
+        TokenAuthorization tokenAuthorization = wsaaClient.getToken();
         Service service = new Service();
         ServiceSoap port = service.getServiceSoap();
 
@@ -49,14 +50,14 @@ public class WsfeClientImpl implements WsfeClient {
         auth.setSign(tokenAuthorization.getSign());
         auth.setToken(tokenAuthorization.getToken());
 
-        int puntoVenta = 1;
+        int puntoVenta = 3;
         int tipoComprobante = 11;
         FERecuperaLastCbteResponse lastCbte = port.feCompUltimoAutorizado(auth, puntoVenta, tipoComprobante);
         int nuevoNumero = lastCbte.getCbteNro() + 1;
 
         FECAEDetRequest detalle = new FECAEDetRequest();
         detalle.setConcepto(1); // Productos
-        detalle.setDocTipo(80); // CUIT
+        detalle.setDocTipo(99); // CUIT
         if (createInvoiceCommand.getToTaxId() != null) {
             detalle.setDocNro(Long.parseLong(createInvoiceCommand.getToTaxId()));
         }
@@ -199,8 +200,8 @@ public class WsfeClientImpl implements WsfeClient {
             auth.setCuit(Long.parseLong(token.getCuit()));
             auth.setSign(token.getSign());
             auth.setToken(token.getToken());
-
-            return port.feParamGetPtosVenta(auth).getResultGet().getPtoVenta();
+            var result = port.feParamGetPtosVenta(auth);
+            return result.getResultGet().getPtoVenta();
         } catch (Exception e) {
             throw new RuntimeException("Error obteniendo puntos de venta", e);
         }

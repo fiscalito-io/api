@@ -20,7 +20,7 @@ ENV AFIP_CUIT=20301234567
 ENV SPRING_PROFILES_ACTIVE=prod
 
 # Copiar el certificado si lo empaquetas
-# COPY certificado.p12 /certs/certificado.p12
+# COPY certificado-prod.p12 /certs/certificado-prod.p12
 
 # Ejecutar la app
 ENTRYPOINT ["java", "-jar", "app.jar"]
