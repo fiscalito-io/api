@@ -57,6 +57,7 @@ public class WsfeClientImpl implements WsfeClient {
 
         FECAEDetRequest detalle = new FECAEDetRequest();
         detalle.setConcepto(1); // Productos
+        detalle.setCondicionIVAReceptorId(4); // Consumidor Final
         detalle.setDocTipo(99); // CUIT
         if (createInvoiceCommand.getToTaxId() != null) {
             detalle.setDocNro(Long.parseLong(createInvoiceCommand.getToTaxId()));

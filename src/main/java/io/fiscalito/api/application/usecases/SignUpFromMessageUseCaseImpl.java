@@ -29,7 +29,6 @@ public class SignUpFromMessageUseCaseImpl implements SignUpFromMessageUseCase {
         var forgotPasswordToken = forgotRepository.createForgotPasswordToken(ForgotModel.builder()
                 .userId(persistedUser.getId())
                 .build());
-
         emailService.sendWelcomeEmailSignUpByPhone(userModel.getEmail(), userModel.getName(), forgotPasswordToken);
         return null;
     }

@@ -14,4 +14,8 @@ public final class ApiConstants {
     public static final String WHATSAPP= "/whatsapp";
     public static final String WHATSAPP_PATH = API_BASE_PATH + WHATSAPP;
     public static final String ME ="/me";
+    public static final String FORGOT_PASSWORD = "/forgot-password";
+    public static final String RESET_PASSWORD = "/reset-password";
+    public static final String UPDATE_PASSWORD = "/update-password";
+    public static final String VALIDATE_ACCOUNT = "/validate-account";
 }

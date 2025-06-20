@@ -15,7 +15,6 @@ import java.time.Instant;
 @Getter
 @Setter
 public class ForgotModel extends BaseModel {
-    private String code;
     private Instant expiresAt;
     private boolean used;
     private Instant usedAt;

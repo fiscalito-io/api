@@ -16,4 +16,6 @@ public interface UserRepository {
     UserModel saveUser(UserModel user);
 
     List<UserModel> findByEmailOrPhoneNumber(String email, String phoneNumber);
+
+    Optional<UserModel> findById(String email);
 }

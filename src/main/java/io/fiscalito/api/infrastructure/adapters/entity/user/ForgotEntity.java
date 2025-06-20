@@ -22,10 +22,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ForgotEntity extends BaseBean{
-
-    @Column(name = "code")
-    private String code;
+public class ForgotEntity extends BaseBean {
 
     @Column(name = "expires_at")
     private Instant expiresAt;

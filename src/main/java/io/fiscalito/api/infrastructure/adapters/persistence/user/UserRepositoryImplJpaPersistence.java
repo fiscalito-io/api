@@ -47,4 +47,10 @@ public class UserRepositoryImplJpaPersistence implements UserRepository {
                 .map(userMapper::toModel)
                 .toList();
     }
+
+    @Override
+    public Optional<UserModel> findById(String id) {
+        var optUserEntity = this.userRepository.findById(id);
+        return optUserEntity.map(userMapper::toModel);
+    }
 }

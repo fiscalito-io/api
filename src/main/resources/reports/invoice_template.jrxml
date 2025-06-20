@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Plantilla base .jrxml para factura tipo AFIP, solo estructura -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="factura_afip" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="123e4567-e89b-12d3-a456-426614174000">
+
+    <parameter name="CAE" class="java.lang.String"/>
+    <parameter name="CAE_VTO" class="java.lang.String"/>
+    <parameter name="PTO_VTA" class="java.lang.String"/>
+    <parameter name="NUMERO" class="java.lang.String"/>
+    <parameter name="FECHA" class="java.lang.String"/>
+    <parameter name="CUIT_EMISOR" class="java.lang.String"/>
+    <parameter name="TOTAL" class="java.lang.Double"/>
+    <parameter name="QR_IMAGE" class="java.awt.Image"/>
+
+    <title>
+        <band height="80">
+            <staticText><reportElement x="0" y="0" width="555" height="20"/><text><![CDATA[Factura C]]></text></staticText>
+            <textField><reportElement x="0" y="20" width="555" height="20"/><textFieldExpression><![CDATA["Fecha: " + $P{FECHA}]]></textFieldExpression></textField>
+            <textField><reportElement x="0" y="40" width="555" height="20"/><textFieldExpression><![CDATA["Número: " + $P{PTO_VTA} + "-" + $P{NUMERO}]]></textFieldExpression></textField>
+        </band>
+    </title>
+
+    <summary>
+        <band height="150">
+            <textField><reportElement x="0" y="0" width="300" height="20"/><textFieldExpression><![CDATA["CAE: " + $P{CAE}]]></textFieldExpression></textField>
+            <textField><reportElement x="0" y="20" width="300" height="20"/><textFieldExpression><![CDATA["Vencimiento CAE: " + $P{CAE_VTO}]]></textFieldExpression></textField>
+            <textField><reportElement x="0" y="40" width="300" height="20"/><textFieldExpression><![CDATA["CUIT Emisor: " + $P{CUIT_EMISOR}]]></textFieldExpression></textField>
+            <textField><reportElement x="0" y="60" width="300" height="20"/><textFieldExpression><![CDATA["Total: $" + $P{TOTAL}]]></textFieldExpression></textField>
+            <image>
+                <reportElement x="400" y="0" width="100" height="100"/>
+                <imageExpression><![CDATA[$P{QR_IMAGE}]]></imageExpression>
+            </image>
+        </band>
+    </summary>
+</jasperReport>

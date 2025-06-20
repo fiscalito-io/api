@@ -19,6 +19,8 @@ public class EmailServiceImplSMTP implements EmailService {
     private final SpringTemplateEngine templateEngine;
     private final String appUrl;
 
+    private static final String FROM_EMAIL = "not-respond@fiscalito.io";
+
     public EmailServiceImplSMTP(JavaMailSender mailSender, SpringTemplateEngine templateEngine, @Value("${app.url}") String appUrl) {
         this.mailSender = mailSender;
         this.templateEngine = templateEngine;
@@ -40,11 +42,38 @@ public class EmailServiceImplSMTP implements EmailService {
 
             helper.setTo(email);
             helper.setSubject("Bienvenido a Fiscalito 🎉");
-            helper.setFrom("no-respond@fiscalito.io");
+            helper.setFrom(FROM_EMAIL);
             helper.setText(htmlContent, true); // HTML
 
             mailSender.send(message);
             log.info("Email de bienvenida enviado a {}", email);
+
+        } catch (Exception e) {
+            log.error("Error enviando email a {}: {}", email, e.getMessage(), e);
+            //TODO add custom exception
+            throw new RuntimeException("Error enviando el email", e);
+        }
+    }
+
+    @Override
+    public void sendForgotPasswordEmail(String email, ForgotModel forgotPasswordToken) {
+        try {
+            Context context = new Context();
+            context.setVariable("expiresAt", forgotPasswordToken.getExpiresAt());
+            context.setVariable("resetLink", this.appUrl+"/reset-password?token=" + forgotPasswordToken.getId());
+
+            String htmlContent = templateEngine.process("email/password-reset", context);
+
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+            helper.setTo(email);
+            helper.setSubject("Actualiza tu contraseña");
+            helper.setFrom(FROM_EMAIL);
+            helper.setText(htmlContent, true); // HTML
+
+            mailSender.send(message);
+            log.info("Email de reset password a {}", email);
 
         } catch (Exception e) {
             log.error("Error enviando email a {}: {}", email, e.getMessage(), e);

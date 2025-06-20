@@ -4,4 +4,6 @@ import io.fiscalito.api.domain.user.ForgotModel;
 
 public interface EmailService {
     void sendWelcomeEmailSignUpByPhone(String email, String name, ForgotModel forgotPasswordToken);
+
+    void sendForgotPasswordEmail(String email, ForgotModel forgotModel);
 }
